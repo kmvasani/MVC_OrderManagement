@@ -1,0 +1,32 @@
+﻿@model MVC_OrderManagement.Models.Order
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<br />
+
+@ViewBag.Kishu
+<br />
+<br />
+
+@Model.OrderId
+<br />
+@Model.OrderName
+<br />
+@Model.OrderDate.ToString("dddd,dd MMMM yyyy HH:mm:ss")
+
+<br />
+<br />
+<div>
+    Hello Welcome to OrderManagement.
+</div>
+
+@*@Html.LabelFor(a => a.OrderDate)
+    <br />
+    @Html.DisplayTextFor(a=>a.OrderName)
+    <br />
+    @Html.LabelForModel("Order")
+    <br />*@
+
+
