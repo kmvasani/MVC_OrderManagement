@@ -16,6 +16,8 @@ namespace MVC_OrderManagement.Controllers
             {
                 MVC_OrderManagement_DataLayer.Order ord = new MVC_OrderManagement_DataLayer.Order();
                 var data = ord.GetOrder(id);
+
+                var temp = ord.GetOrders();    //Without Stored Procedure(Using Ado.Net Query)
             }
 
 

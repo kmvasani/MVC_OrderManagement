@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace MVC_OrderManagement_DataLayer
@@ -105,7 +106,49 @@ namespace MVC_OrderManagement_DataLayer
 
         public List<Order> GetOrders()
         {
-            return new List<Order>();
+            List<Order> orders = new List<Order>();
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("SELECT  * from [OrderManagement].[dbo].[Orders]");
+
+
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand(sb.ToString(), conn);
+
+            conn.Open();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataSet ds = new DataSet();
+
+            try
+            {
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            //tranform the dataset to entities
+
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                orders.Add(new Order()
+                {
+                    OrderId = new Guid(dr["Id"].ToString()),
+                    OrderName = dr["Name"].ToString(),
+                    OrderDate = Convert.ToDateTime(dr["OrderDate"].ToString()),
+                    OrderStatus = "Active"
+                });
+
+            }
+
+            return orders;
+
         }
     }
 }

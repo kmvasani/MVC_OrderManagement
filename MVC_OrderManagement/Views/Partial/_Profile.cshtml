@@ -1,0 +1,12 @@
+﻿
+@{ 
+    var city = ViewData["City"] != null ? ViewData["City"].ToString() : "Not Available";
+}
+
+@*@ViewData["City"].ToString()*@  @*This will throw an null reference error*@
+
+@city
+
+<div>
+    Hello, Please Create an Order!..
+</div>

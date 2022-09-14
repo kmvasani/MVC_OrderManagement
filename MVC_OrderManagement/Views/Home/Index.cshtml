@@ -29,4 +29,7 @@
     @Html.LabelForModel("Order")
     <br />*@
 
+<br />
+<br />
 
+@Html.Partial("../Partial/_Profile", @Model, new ViewDataDictionary { { "City","Brampton"}, { "Province","ON"} })  @*Display a Partial Page _Profile in all the Views File*@
