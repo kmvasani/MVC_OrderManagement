@@ -1,4 +1,5 @@
-﻿using MVC_OrderManagement.Models;
+﻿using MVC_OrderManagement.Mapper;
+using MVC_OrderManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,17 @@ namespace MVC_OrderManagement.Controllers
             if (!string.IsNullOrEmpty(id))
             {
                 MVC_OrderManagement_DataLayer.Order ord = new MVC_OrderManagement_DataLayer.Order();
-                var data = ord.GetOrder(id);
+                
+                //var data = ord.GetOrder(id);
+
+                //order = data.Map(); //Converting entities to DTO,
+                //Simplifies above commented two lines with the below line
+
+                order = ord.GetOrder(id).Map();
 
                 var temp = ord.GetOrders();    //Without Stored Procedure(Using Ado.Net Query)
+
+                var tempDTO = temp.Select(a => a.Map()); //Using Mathod Extention
             }
 
 
@@ -29,7 +38,7 @@ namespace MVC_OrderManagement.Controllers
             //    OrderStatus = ""
             //};
 
-            ViewBag.Kishu = "Hello welcome to this page";
+            //ViewBag.Kishu = "Hello welcome to this page";
             return View(order);
         }
 
